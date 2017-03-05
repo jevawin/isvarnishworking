@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+	<head>
+		<meta charset='utf-8'>
+		<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+		<meta name='viewport' content='width=device-width, initial-scale=1'>
+		<meta http-equiv='cache-control' content='no-cache' />
+		<meta name='description' content='Find out if Varnish is working on your server in seconds, with this free tool!' />
+		<title>Is Varnish working?</title>
+
+		<!-- Bootstrap -->
+		<link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css' rel='stylesheet'>
+		<link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' rel='stylesheet'>
+		<link href='https://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/united/bootstrap.min.css' rel='stylesheet'>
+		<style>
+			.navbar {
+				border: none;
+				border-radius: 0;
+				background: rgb(25, 110, 239);
+			}
+
+			.navbar-default .navbar-nav>li>a:hover,
+			.navbar-default .navbar-nav>li>a:focus {
+				background: rgb(18, 82, 179);
+			}
+
+			.row {
+				padding: 2em 0;
+			}
+
+			.row:first-child {
+				padding: 0;
+			}
+
+			form {
+				width: 100%;
+				margin: auto;
+				margin-bottom: 2em;
+				padding: 2em 0;
+				overflow: hidden;
+			}
+
+			input:not([type='checkbox']),
+			button.btn {
+				width: 100%;
+				margin: 20px auto;
+				height: auto;
+				font-size: 2em;
+				line-height: 2em;
+			}
+
+			input[type='text'] {
+				text-indent: 1%;
+			}
+
+			textarea.form-control {
+				color: #999;
+			}
+
+			textarea.form-control:focus {
+				color: #333;
+			}
+
+			button.btn {
+				padding: 2px 10px;
+			}
+
+			img {
+				max-width: 100%;
+				height: auto;
+				max-height: 200px;
+			}
+
+			pre {
+				float: left;
+				clear: both;
+				overflow: hidden;
+				white-space: pre-wrap;
+				/* css-3 */
+				white-space: -moz-pre-wrap;
+				/* Mozilla, since 1999 */
+				white-space: -pre-wrap;
+				/* Opera 4-6 */
+				white-space: -o-pre-wrap;
+				/* Opera 7 */
+				word-wrap: break-word;
+				/* Internet Explorer 5.5+ */
+			}
+
+			.clear {
+				clear: both;
+			}
+
+			a[target='_blank']::after {
+				content: ' \f08e';
+				font-family: 'FontAwesome';
+				vertical-align: super;
+				font-size: 75%;
+			}
+
+			a.btn::after {
+				content: '';
+			}
+
+			footer {
+				margin-top: 2em;
+				padding: 1em 0;
+				background: #eee;
+				border-top: 1px solid #ddd;
+			}
+
+			@media (min-width: 768px) {
+				footer .col-sm-6:last-child {
+					text-align: right;
+				}
+			}
+
+			.me {
+				margin: 0 5px;
+				height: 30px;
+				width: auto;
+			}
+
+			.well {
+				margin-top: 40px;
+			}
+
+			.alert {
+				overflow: hidden;
+			}
+
+			.private {
+				color: #999999;
+			}
+
+			.fa-heart {
+				color: #c60200;
+			}
+
+			#headers,
+			#headers-msg {
+				display: none;
+			}
+		</style>
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+      <script src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js'></script>
+      <script src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js'></script>
+    <![endif]-->
+
+		<!-- Google Analytics -->
+		<script data-cfasync='false' type='text/javascript'>
+			(function(i, s, o, g, r, a, m) {
+				i['GoogleAnalyticsObject'] = r;
+				i[r] = i[r] || function() {
+					(i[r].q = i[r].q || []).push(arguments)
+				}, i[r].l = 1 * new Date();
+				a = s.createElement(o),
+					m = s.getElementsByTagName(o)[0];
+				a.async = 1;
+				a.src = g;
+				m.parentNode.insertBefore(a, m)
+			})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+			ga('create', 'UA-21399501-4', 'auto');
+			ga('send', 'pageview');
+		</script>
+	</head>
+
+	<body role='document'>
+		<div class='navbar navbar-default' role='navigation'>
+			<div class='container'>
+				<div class='navbar-header'>
+					<button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='.navbar-collapse'>
+						<span class='sr-only'>Toggle navigation</span>
+						<span class='icon-bar'></span>
+						<span class='icon-bar'></span>
+						<span class='icon-bar'></span>
+					</button>
+					<a class='navbar-brand'>Also free:</a>
+				</div>
+				<div class='navbar-collapse collapse'>
+					<ul class='nav navbar-nav'>
+						<li><a href='https://isvarnishworking.com/'>Is mod_pagespeed working?</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class='container theme-showcase' role='main'>
+			<div class='row'>
+				<div class='col-md-12'>
+					<div class='page-header'>
+						<h1>Check if Varnish is enabled<br/>
+							<small>Find out if <strong>Varnish</strong> is working on your server in seconds, with this free tool!</small></h1>
+					</div>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='col-sm-12'>
+					<form id='check' method='get' action='./'>
+						<div class='col-md-12 col-lg-9 form-group'>
+							<input class='form-control' id='domain' type='text' name='d' placeholder='domain.com' autocomplete='off' />
+							<p>Here's the user agent we'll use (change it if you like): <i class='fa fa-question-circle' title='Some servers are set up to reject unusual queries. By using a regular Chrome user agent, we should be fine.'></i></p>
+							<textarea class='form-control' id='ua' name='ua'>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36</textarea>
+							<br/>
+							<div id='info' class='alert alert-info' role='alert'>
+								<p>Enter the URL you'd like to check. <a href='https://jamiegoodwin.uk/how-to-find-out-if-varnish-is-working-on-your-site/'>Report errors / post questions here.</a></p>
+							</div>
+							<div id='headers-msg' class='alert alert-info' role='alert'>
+								Here are the headers we received:
+							</div>
+							<pre id='headers'></pre>
+						</div>
+						<div class='col-md-12 col-lg-3'>
+							<button type='submit' class='btn btn-success'>
+					    		<i class='fa fa-dashboard'></i> Check
+					    	</button>
+							<br/>
+							<p class='private'>
+								<input type='checkbox' id='private' /> Private <i class='fa fa-question-circle' title='I use Google Analytics to anonymously record site checks. If you want your URL kept private, tick this box.'></i>
+							</p>
+						</div>
+					</form>
+				</div>
+			</div>
+            <div class="row">
+				<div class="col-sm-3">
+					<img src="vnsh.png" />
+				</div>
+				<div class="col-sm-9">
+					<h3 id="about"><i class="fa fa-question"></i> How it works</h3>
+					<hr />
+					<p><strong>Varnish</strong> adds <a href="https://varnish-cache.org/docs/2.1/faq/http.html" rel="nofollow" target="_blank">the following header</a> to HTTP responses that it handles:</p>
+					<pre>X-Varnish</pre><br class="clear"/>
+					<br/>
+					<p>You should be able to see that <strong>Varnish</strong> is working on your site by inspecting the response headers and looking for that header. Or, enter your URL above and my tool will find it for you :-)</p>
+					<p>Sometimes, Varnish is up and running but not working properly. This tool also checks the</p>
+					<pre>X-Cache</pre><br class="clear"/>
+					<br/>
+					<p>header to ensure that the content being served is cached - indicated by a <strong>HIT</strong> value.</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<img src="save.png" /><br/><br/>
+				</div>
+				<div class="col-sm-9">
+					<h3 id="donate"><i class="fa fa-smile-o"></i> Found it useful? Save a child...</h3>
+					<hr/>
+					<p>Found it useful? Give a one-off &pound;2 donation to <a href="http://www.savethechildren.org.uk/about-us" rel="nofollow" target="_blank" class="stc">Save the Children</a> to say thanks:</p>
+					<a href="https://paypal.savethechildren.org.uk/?amount=2&source_code=A14005010" rel="nofollow" class="btn btn-success donate" target="_blank">Donate</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-9 col-sm-offset-3">
+					<h3><i class="fa fa-question-circle"></i> What is Varnish?</h3>
+					<hr/>
+					<p><strong>Varnish Cache</strong> is a reverse proxy caching software. It works by sitting in front of your server software (e.g. Apache/NGINX) and caching its content. It's very simple to set up and very fast. Varnish receives all of your incoming connections and, if it doesn't have a cached version of the content, passes them to your server software. Once it has a copy of the content in its cache, it returns it without sending the request to your server software (and it does so damn fast).</p>
+					<p>For a really good explanation of how Varnish works, check out the developer's <a href="https://varnish-cache.org/intro/index.html#intro" rel="nofollow" target="_blank">introduction to Varnish</a>, or have a look at their <a href="https://www.youtube.com/watch?v=fGD14ChpcL4" rel="nofollow" target="_blank">excellent video</a>.</p>
+				</div>
+			</div>
+		</div>
+
+		<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					<strong>Thank you:</strong><br/>
+					<a href="http://getbootstrap.com/" rel="nofollow" target="_blank">Twitter (Bootstrap)</a>, <a href="http://www.bootstrapcdn.com/" rel="nofollow" target="_blank">MaxCDN (Bootstrap CDN)</a>, <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow" target="_blank">Font Awesome (Icons)</a> and of course, <a href="https://www.varnish-software.com/" rel="nofollow" target="_blank">Varnish Software</a> for the excellent <a href="https://varnish-cache.org/" rel="nofollow" target="_blank">Varnish Cache</a>.
+				</div>
+				<div class="col-sm-6">
+					<hr class="visible-xs-block" />
+					<p>Built with <i class="fa fa-heart"></i> by and <i class="fa fa-copyright"></i> <?php echo date('Y'); ?> <a href="https://jamiegoodwin.uk/?utm_campaign=Development&utm_source=isvarnishworking.uk" target="_blank"><img class="me img-circle" src="https://en.gravatar.com/userimage/29390999/bae7a8e03860f470758961a20d38f70e.jpg?size=50" /> Jamie Goodwin</a></p>
+					<p class="small">V1.0</p>
+				</div>
+			</div>
+		</div>
+		</footer>
+
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
+		<script>
+			$(document).ready(function() {
+				var
+					$info = $('#info'),
+					$check = $('#check'),
+					$output;
+
+				// Activate JS tooltips on question marks (hover)
+				$('.fa-question-circle').tooltip();
+
+				// Update copyright to date
+				$('#todate').html('&ndash;' + new Date().getFullYear().toString().slice(-2));
+
+				$($check).submit(function() {
+					var
+						$domain = encodeURIComponent($('#domain').val()),
+						$ua = encodeURIComponent($('#ua').val()),
+						$gadmn = ($('#private').prop('checked')) ? 'Private' : $domain;
+
+					// GA check
+					ga('send', 'event', 'Check', 'Submit', $gadmn);
+
+					// Clear previous check
+					$('#headers')
+						.html("")
+						.hide();
+					$('#headers-msg').hide();
+
+					$($info)
+						.removeClass(function(index, css) {
+							return (css.match(/(^|\s)alert-\S+/g) || []).join(' ');
+						})
+						.addClass('alert-warning')
+						.html('Checking...');
+
+					// Download headers from checked site - this loads handleResponse()
+					$.getScript('https://isvarnishworking-jmrccqwsbd.now.sh?url=' + $domain + '&ua=' + $ua)
+						.fail(function() {
+							// GA fail
+							ga('send', 'event', 'Check', 'Error', $gadmn);
+							updatePage('alert-danger', 'Oops, something went wrong. We\'ve logged the error and are looking into it.', -1, -1)
+						});
+
+					//$.getScript('http://localhost:8080/?url=' + $domain + '&ua=' + $ua);
+
+					$.handleResponse = function(data) {
+						var $data, $vsh;
+
+						// Parse response, set error
+						try {
+							$data = $.parseJSON(decodeURIComponent(data));
+							$vsh = $data[0];
+						} catch (e) {
+							// GA fail
+							ga('send', 'event', 'Check', 'Error', $gadmn);
+							updatePage('alert-danger', 'Oops, something went wrong. We\'ve logged the error and are looking into it.', -1, -1)
+							return;
+						}
+
+						$data.splice(0, 1);
+
+						// Proceed based on $vsh
+						switch ($vsh) {
+							case 0:
+								fail(0, $data);
+								break;
+							case 1:
+								fail(1, $data);
+								break;
+							case 2:
+								pass($data);
+								break;
+							default:
+								error();
+						}
+					}
+
+					function headers($data) {
+						// Create output headers
+						var
+							$headers = '',
+							$location = $data[0],
+							$reqs = $data.length;
+
+						$data.splice(0, 1);
+
+						$.each($data, function($index, $value) {
+							$.each($value, function($index, $value) {
+								// Add headers to output
+								$headers += '<strong>' + $index + ':</strong> ' + $value + '<br/>';
+							});
+							// Add a final <br/> to separate requests
+							$headers += ($reqs > 1) ? '<br/>' : '';
+						});
+
+						return [$location, $headers];
+					}
+
+					function pass($data) {
+						/* GA success */
+						ga('send', 'event', 'Check', 'Success', $gadmn);
+
+						var
+							$headers = headers($data),
+							$location = $headers[0],
+							$headers = $headers[1],
+							$alert = 'alert-success',
+							$message = 'Success! Varnish is running on that domain.';
+
+						updatePage($alert, $message, $headers, $location);
+					}
+
+					function fail($type, $data) {
+						/* GA fail */
+						ga('send', 'event', 'Check', 'Fail', $gadmn);
+
+						var
+							$headers = headers($data),
+							$location = $headers[0],
+							$headers = $headers[1],
+							$alert = 'alert-danger',
+							$message = ($type === 0) ? 'Fail! Varnish is not running on that domain.' : 'Fail...ish! We detected Varnish on that domain, but the content doesn\'t appear to be cached. Best check your configuration.';
+
+						updatePage($alert, $message, $headers, $location);
+					}
+
+					function error() {
+						// GA fail
+						ga('send', 'event', 'Check', 'Error', $gadmn);
+
+						var
+							$headers = -1,
+							$location = -1,
+							$alert = 'alert-danger',
+							$message = 'Uh oh! Looks like there was an error connecting.<br/><br/><small><strong>Things to check:</strong><ul><li>Is that the right URL?</li><li>Is that site blocking our requests?</li></ul></small>';
+
+						updatePage($alert, $message, $headers, $location);
+					}
+
+					function updatePage($alert, $message, $headers, $location) {
+						$($info)
+							.removeClass(function(index, css) {
+								return (css.match(/(^|\s)alert-\S+/g) || []).join(' ');
+							})
+							.addClass($alert)
+							.html($message);
+
+						if ($headers !== -1) {
+							$('#headers')
+								.html($headers)
+								.show();
+
+							$('#headers-msg').show();
+						}
+
+						if ($location !== -1) {
+							$('#domain').val($location);
+						}
+					}
+
+					return false;
+				});
+
+				// Donate button tracking
+				$('.donate, .stc').click(function() {
+					ga('send', 'event', 'Donate', 'Click', $(this).attr('class').replace(/\./, ''));
+				});
+			});
+		</script>
+	</body>
+
+</html>
