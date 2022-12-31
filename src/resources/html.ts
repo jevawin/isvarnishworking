@@ -238,9 +238,9 @@ export default `<!DOCTYPE html>
 					<br/>
 					<p>You should be able to see that <strong>Varnish</strong> is working on your site by inspecting the response headers and looking for that header. Or, enter your URL above and my tool will find it for you :-)</p>
 					<p>Sometimes, Varnish is up and running but not working properly. This tool also checks the</p>
-					<pre>X-Cache</pre><br class="clear"/>
+					<pre>Age</pre><br class="clear"/>
 					<br/>
-					<p>header to ensure that the content being served is cached - indicated by a <strong>HIT</strong> value.</p>
+					<p>header to ensure that the content being served is cached - indicated by a value greater than 0.</p>
 				</div>
 			</div>
 			<div class="row">
