@@ -22,7 +22,6 @@ const varnishCheck = async (checkurl: string, checkua: string) => {
     // Run once to allow Varnish to cache URL
     const presponse = await fetch(loc, options);
 
-    // TODO use final url
     const response = await fetch(presponse.url, options);
     const headers = Object.fromEntries(response.headers.entries());
 
@@ -47,7 +46,7 @@ const varnishCheck = async (checkurl: string, checkua: string) => {
     }
 
     // Add final location to output
-    out.unshift(loc);
+    out.unshift(response.url);
 
     // Add vsh/error state to output
     out.unshift(vsh);

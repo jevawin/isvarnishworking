@@ -202,7 +202,7 @@ export default `<!DOCTYPE html>
 				<div class='col-sm-12'>
 					<form id='check' method='get' action='./'>
 						<div class='col-md-12 col-lg-9 form-group'>
-							<input class='form-control' id='domain' type='text' name='d' placeholder='domain.com' autocomplete='off' autocapitalize='off' autofocus value="varnish-cache.org" />
+							<input class='form-control' id='domain' type='text' name='d' placeholder='domain.com' autocomplete='off' autocapitalize='off' spellcheck='false' autofocus />
 							<p>Here's the user agent we'll use (change it if you like): <i class='fa fa-question-circle' title='Some servers are set up to reject unusual queries. By using a regular Chrome user agent, we should be fine.'></i></p>
 							<textarea class='form-control' id='ua' name='ua'>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36</textarea>
 							<br/>
