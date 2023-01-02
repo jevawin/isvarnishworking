@@ -1,3 +1,11 @@
+// Lower case hasOwnProperty function
+const hasOwnPropertyCI = (object: object, prop: string) => {
+  return Object.keys(object)
+    .filter((v: string) => {
+      return v.toLowerCase() === prop.toLowerCase();
+    }).length > 0;
+};
+
 // Helper function to neaten headers so we can return them
 const formatHeaders = (sts: number, msg: string, hds: object) => {
   return Object.assign({ [sts]: msg }, hds);
@@ -30,8 +38,8 @@ const varnishCheck = async (checkurl: string, checkua: string) => {
       vsh = 0;
 
       // Look for 'x-varnish' or 'via: XXX varnish' in the headers
-      if (headers.hasOwnProperty("x-varnish")) vsh = 1;
-      if (headers.hasOwnProperty("via")) {
+      if (hasOwnPropertyCI(headers, "x-varnish")) vsh = 1;
+      if (hasOwnPropertyCI(headers, "via")) {
         const via: string = headers.via || "";
         if (via.indexOf("varnish") > -1) vsh = 1;
       }
