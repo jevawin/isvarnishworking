@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang='en'>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name='description' content='Find out if Varnish is working on your server in seconds, with this free tool!' />
+    <title>Is Varnish working?</title>
+    <link rel="stylesheet" href="output.css" />
+  </head>
+
+  <body class="bg-black text-white min-h-screen prose-invert">
+    <div class="container mx-auto px-4 text-center">
+      <div class="font-sans text-center font-bold my-8">
+        <h1 class="text-[12vw] lg:text-8xl bg-gradient-to-r to-fuchsia-500 via-pink-500 from-purple-500 bg-clip-text text-transparent p-1">Varnish Check</h1>
+        <h3 class="text-[4vw] lg:text-5xl">Check if Varnish Cache is<br />working in a flash ⚡️</h3>
+      </div>
+
+      <div class="flex flex-col mx-auto my-8 justify-center">
+        <!-- the url we're going to check, with a nice gradient border -->
+        <div class="bg-gradient-to-r from-fuchsia-500 via-pink-500 to-purple-500 p-1 inline-block rounded-full box-border">
+          <input type="url" class="rounded-full bg-zinc-800 text-[8vw] lg:text-5xl p-4 py-6 focus:outline-none w-full font-mono box-border shadow-inner" placeholder="yourwebsite.com" />
+        </div>
+
+        <button class="bg-pink-600 text-[8vw] lg:text-5xl rounded-full px-10 mx-4">Check</button>
+      </div>
+    </div>
+  </body>
+
+</html>
